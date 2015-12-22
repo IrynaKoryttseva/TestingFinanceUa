@@ -43,22 +43,22 @@ public class TestCheckValueFinancePortal {
     }
 
     @Then("the user should see the correct result average value for buying")
-    public void checkCorrectResultAverageBuying(){
+    public void checkCorrectResultAverageBuying() {
         stepsLogic.checkAverageForBuying();
     }
 
     @Then("the user should see the correct result average value for selling")
-    public void checkCorrectResultAverageSelling(){
+    public void checkCorrectResultAverageSelling() {
         stepsLogic.checkAverageForSelling();
     }
 
     @Then("the user should see the correct result optimal value for buying")
-    public void checkCorrectResultOptimalBuying(){
+    public void checkCorrectResultOptimalBuying() {
         stepsLogic.checkOptimalForBuying();
     }
 
     @Then("the user should see the correct result optimal value for selling")
-    public void checkCorrectResultOptimalSelling(){
+    public void checkCorrectResultOptimalSelling() {
         stepsLogic.checkOptimalForSelling();
     }
 }
