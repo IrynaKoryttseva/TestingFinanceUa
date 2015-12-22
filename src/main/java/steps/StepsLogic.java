@@ -18,6 +18,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkMinRateForBuying(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForBuying();
         tableRates.getResultForBuying();
         double actual = tableRates.findMinRateForBuyingActual();
@@ -27,6 +28,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkMinRayeForSelling(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForSelling();
         tableRates.getResultForSelling();
         double actual = tableRates.findMinRateForSellingActual();
@@ -36,6 +38,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkMaxRateForBuying(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForBuying();
         tableRates.getResultForBuying();
         double actual = tableRates.findMaxRateForBuyingActual();
@@ -45,6 +48,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkMaxRateForSelling(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForSelling();
         tableRates.getResultForSelling();
         double actual = tableRates.findMaxRateForSellingActual();
@@ -54,6 +58,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkAverageForBuying(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForBuying();
         tableRates.getResultForBuying();
         double actual = tableRates.findAverageRateForBuyingActual();
@@ -63,6 +68,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkAverageForSelling(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForSelling();
         tableRates.getResultForSelling();
         double actual = tableRates.findAverageRateForSellingActual();
@@ -72,6 +78,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkOptimalForBuying(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForBuying();
         tableRates.getResultForBuying();
         double actual =tableRates.findMaxRateForBuyingActual();
@@ -81,6 +88,7 @@ public class StepsLogic extends ScenarioSteps{
 
     @Step
     public void checkOptimalForSelling(){
+        tableRates.getMaxIndexResult();
         tableRates.getRatesForSelling();
         tableRates.getResultForSelling();
         double actual = tableRates.findMinRateForSellingActual();

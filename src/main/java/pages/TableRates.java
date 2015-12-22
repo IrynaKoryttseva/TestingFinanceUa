@@ -20,6 +20,28 @@ public class TableRates extends PageObject {
     private List<Double> valuesForSelling;
     private List<Double> resultForBuying;
     private List<Double> resultForSelling;
+    private int maxIndexResult;
+
+    public void getMaxIndexResult() {
+        List<String> list = new ArrayList<>();
+        int index = 2;
+        while (true) {
+            try {
+                WebElement rowValue = getDriver().findElement(By.xpath(".//*[@id='feMain2']/table/tbody/tr[" + index + "]"));
+                if (!rowValue.isEnabled()) {
+                    break;
+                }
+                if (rowValue.isEnabled()) {
+                    list.add(rowValue.getText());
+                    index++;
+                }
+            } catch (Exception i) {
+                break;
+            }
+        }
+        int size = list.size() + 1;
+        setMaxIndexResult(size);
+    }
 
     public void openPage() {
         getDriver().get("http://finance.i.ua/");
@@ -31,52 +53,48 @@ public class TableRates extends PageObject {
         rateOfEuro.click();
     }
 
-    public List<Double> getResultForBuying(){
+    public void getResultForBuying() {
         List<Double> resultForBuying = new ArrayList<>();
-        for (int i = 38; i <= 41; i++) {
+        for (int i = (maxIndexResult - 3); i <= maxIndexResult; i++) {
             WebElement rowValue = getDriver().findElement(By.xpath(".//*[@id='feMain2']//tr[" + i + "]/td[2]"));
             if (rowValue.isDisplayed()) {
                 resultForBuying.add(Double.parseDouble(rowValue.getText()));
             }
         }
-            setResultForBuying(resultForBuying);
-            return resultForBuying;
+        setResultForBuying(resultForBuying);
     }
 
-    public List<Double> getResultForSelling(){
+    public void getResultForSelling() {
         List<Double> resultForSelling = new ArrayList<>();
-        for (int i =38; i<=41; i++){
+        for (int i = (maxIndexResult - 3); i <= maxIndexResult; i++) {
             WebElement rowValue = getDriver().findElement(By.xpath(".//*[@id='feMain2']//tr[" + i + "]/td[3]"));
-            if (rowValue.isDisplayed()){
+            if (rowValue.isDisplayed()) {
                 resultForSelling.add(Double.parseDouble(rowValue.getText()));
             }
         }
         setResultForSelling(resultForSelling);
-        return resultForSelling;
     }
 
-    public List<Double> getRatesForBuying(){
+    public void getRatesForBuying() {
         List<Double> valuesForBuying = new ArrayList<>();
-        for (int i = 2; i <= 36; i++) {
+        for (int i = 2; i <= (maxIndexResult - 5); i++) {
             WebElement rowValue = getDriver().findElement(By.xpath(".//*[@id='feMain2']//tr[" + i + "]/td[2]"));
             if (rowValue.isDisplayed()) {
                 valuesForBuying.add(Double.parseDouble(rowValue.getText()));
             }
         }
         setValuesForBuying(valuesForBuying);
-        return valuesForBuying;
     }
 
-    public List<Double> getRatesForSelling(){
+    public void getRatesForSelling() {
         List<Double> valuesForSelling = new ArrayList<>();
-        for (int i = 2; i <= 36; i++) {
+        for (int i = 2; i <= (maxIndexResult - 5); i++) {
             WebElement rowValue = getDriver().findElement(By.xpath(".//*[@id='feMain2']//tr[" + i + "]/td[3]"));
             if (rowValue.isDisplayed()) {
                 valuesForSelling.add(Double.parseDouble(rowValue.getText()));
             }
         }
         setValuesForSelling(valuesForSelling);
-        return valuesForSelling;
     }
 
     public double findMinRateForBuyingActual() {
@@ -89,32 +107,32 @@ public class TableRates extends PageObject {
         return minRateForSellingActual;
     }
 
-    public double findMinResultForBuying(){
+    public double findMinResultForBuying() {
         double minResultForBuying = Collections.min(resultForBuying);
         return minResultForBuying;
     }
 
-    public double findMinResultForSelling(){
+    public double findMinResultForSelling() {
         double minResultForSelling = Collections.min(resultForSelling);
         return minResultForSelling;
     }
 
-    public double findMaxRateForBuyingActual(){
+    public double findMaxRateForBuyingActual() {
         double maxRateForBuyingActual = Collections.max(valuesForBuying);
         return maxRateForBuyingActual;
     }
 
-    public double findMaxRateForSellingActual(){
+    public double findMaxRateForSellingActual() {
         double maxRateForSellingActual = Collections.max(valuesForSelling);
         return maxRateForSellingActual;
     }
 
-    public double findMaxResultForBuying(){
+    public double findMaxResultForBuying() {
         double maxResultForBuying = Collections.max(resultForBuying);
         return maxResultForBuying;
     }
 
-    public double findMaxResultForSelling(){
+    public double findMaxResultForSelling() {
         double maxResultForSelling = Collections.max(resultForSelling);
         return maxResultForSelling;
     }
@@ -139,41 +157,41 @@ public class TableRates extends PageObject {
         return averageRateForSellingActual;
     }
 
-    public double findAverageResultForBuying(){
-        double averageResultForBuying=0;
-        for(double elem : resultForBuying){
-            if(elem>Collections.min(resultForBuying)&&elem<Collections.max(resultForBuying)) {
-                averageResultForBuying=elem;
+    public double findAverageResultForBuying() {
+        double averageResultForBuying = 0;
+        for (double elem : resultForBuying) {
+            if (elem > Collections.min(resultForBuying) && elem < Collections.max(resultForBuying)) {
+                averageResultForBuying = elem;
             }
         }
         return averageResultForBuying;
     }
 
-    public double findAverageResultForSelling(){
-        double averageResultForSelling=0;
-        for(double elem:resultForSelling){
-            if(elem>Collections.min(resultForSelling)&&elem<Collections.max(resultForSelling)){
-               averageResultForSelling=elem;
+    public double findAverageResultForSelling() {
+        double averageResultForSelling = 0;
+        for (double elem : resultForSelling) {
+            if (elem > Collections.min(resultForSelling) && elem < Collections.max(resultForSelling)) {
+                averageResultForSelling = elem;
             }
         }
         return averageResultForSelling;
     }
 
-    public double findOptimalForBuying(){
-        double optimalForBuying=0;
-        for(double elem:resultForBuying){
-            if(elem==Collections.max(resultForBuying)){
-                optimalForBuying=elem;
+    public double findOptimalForBuying() {
+        double optimalForBuying = 0;
+        for (double elem : resultForBuying) {
+            if (elem == Collections.max(resultForBuying)) {
+                optimalForBuying = elem;
             }
         }
         return optimalForBuying;
     }
 
-    public double findOptimalForSelling(){
-        double optimalForSelling=0;
-        for(double elem:resultForSelling){
-            if(elem==Collections.min(resultForSelling)){
-                optimalForSelling=elem;
+    public double findOptimalForSelling() {
+        double optimalForSelling = 0;
+        for (double elem : resultForSelling) {
+            if (elem == Collections.min(resultForSelling)) {
+                optimalForSelling = elem;
             }
         }
         return optimalForSelling;
@@ -193,6 +211,10 @@ public class TableRates extends PageObject {
 
     public void setResultForSelling(List<Double> resultForSelling) {
         this.resultForSelling = resultForSelling;
+    }
+
+    public void setMaxIndexResult(int maxIndexResult) {
+        this.maxIndexResult = maxIndexResult;
     }
 }
 
